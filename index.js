@@ -5,12 +5,12 @@ import checkAuth from './utils/checkAuth.js';
 import * as UserController from './controlles/UserController.js'
 import * as PostController from './controlles/PostController.js'
 
-mongoose.connect('mongodb+srv://vool34:wwwwww@movieadvisor.m94cj.mongodb.net/movieadvisor')
+mongoose.connect('mongodb+srv://vool34:wwwwww@movieadvisor.m94cj.mongodb.net/mernbackend')
   .then(() => {
-    console.log('DB OK')
+    console.log('DB Status - OK')
   })
   .catch((err) => {
-    console.log('DB ERROR', err)
+    console.log('DB Status - ERROR', err)
   })
 
 const app = express();
