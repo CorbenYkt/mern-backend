@@ -4,6 +4,7 @@ import { RegisterValidation, loginValidation, postCreateValidation } from './val
 import checkAuth from './utils/checkAuth.js';
 import * as UserController from './controlles/UserController.js'
 import * as PostController from './controlles/PostController.js'
+import cors from 'cors';
 
 mongoose.connect('mongodb+srv://vool34:wwwwww@movieadvisor.m94cj.mongodb.net/mernbackend')
   .then(() => {
@@ -15,6 +16,7 @@ mongoose.connect('mongodb+srv://vool34:wwwwww@movieadvisor.m94cj.mongodb.net/mer
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.post('/auth/login', loginValidation, UserController.Login);
 app.post('/auth/register', RegisterValidation, UserController.Register);
