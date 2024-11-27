@@ -23,6 +23,7 @@ app.post('/auth/register', RegisterValidation, UserController.Register);
 app.get('/auth/me', checkAuth, UserController.GetMe);
 
 app.get('/posts/', PostController.getAll);
+app.get('/posts/tags', PostController.getTags);
 app.get('/posts/:id', PostController.getOne);
 app.post('/posts/', checkAuth, postCreateValidation, PostController.create);
 app.delete('/posts/:id', checkAuth, PostController.remove);

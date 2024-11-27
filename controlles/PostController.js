@@ -12,6 +12,21 @@ export const getAll = async (req, res) => {
         })
     }
 };
+
+export const getTags = async (req, res) => {
+    try {
+        const posts = await PostModel.find().limit(5).exec();
+        const tags = posts.map(obj => obj.tags.flat().slice(5, 5))
+
+        res.json(tags)
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({
+            message: 'Error fetching posts tags'
+        })
+    }
+};
+
 export const getOne = async (req, res) => {
     try {
         const postId = req.params.id;
@@ -106,7 +121,6 @@ export const create = async (req, res) => {
         })
     }
 };
-
 export const update = async (req, res) => {
     try {
         const postId = req.params.id;
