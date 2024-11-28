@@ -28,41 +28,27 @@ export const getTags = async (req, res) => {
 };
 
 export const getOne = async (req, res) => {
+
+    const postId = req.params.id;
     try {
-        const postId = req.params.id;
-        PostModel.findOneAndUpdate({
-            _id: postId,
-        }, {
-            $inc: {
-                viewsCount: 1
-            }
-        },
-            {
-                returnDocument: 'after',
-            },
-            (err, doc) => {
-                if (err) {
-                    console.log(err)
-                    return res.status(500).json({
-                        message: 'Error fetching post'
-                    })
+        const updatedPost = await PostModel.findOneAndUpdate(
+            { _id: postId },
+            { $inc: { viewsCount: 1 } },
+            { new: true }
+        );
 
-                }
+        if (!updatedPost) {
+            return res.status(404).json({
+                message: 'Post not found'
+            });
+        }
 
-                if (!doc) {
-                    return res.status(404).json({
-                        message: 'Post not found'
-                    })
-                }
-                res.json(doc);
-            })
-
-
+        res.json(updatedPost);
     } catch (err) {
-        console.log(err)
+        console.error(err);
         res.status(500).json({
-            message: 'Error fetching one post'
-        })
+            message: 'Error fetching post'
+        });
     }
 };
 export const remove = async (req, res) => {
