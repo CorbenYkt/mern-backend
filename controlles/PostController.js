@@ -30,39 +30,32 @@ export const getTags = async (req, res) => {
 export const getOne = async (req, res) => {
     try {
         const postId = req.params.id;
-        const post = await PostModel.findById({
-            _id: postId
-        }).populate('user').exec();
+        PostModel.findOneAndUpdate({
+            _id: postId,
+        }, {
+            $inc: {
+                viewsCount: 1
+            }
+        },
+            {
+                returnDocument: 'after',
+            },
+            (err, doc) => {
+                if (err) {
+                    console.log(err)
+                    return res.status(500).json({
+                        message: 'Error fetching post'
+                    })
 
-        res.json(post)
+                }
 
-        // const postId = req.params.id;
-        // PostModel.findOneAndUpdate({
-        //     _id: postId,
-        // }, {
-        //     $inc: {
-        //         viewsCoint: 1
-        //     }
-        // },
-        //     {
-        //         returnDocument: 'after',
-        //     },
-        //     (err, doc) => {
-        //         if (err) {
-        //             console.log(err)
-        //             return res.status(500).json({
-        //                 message: 'Error fetching post'
-        //             })
-
-        //         }
-
-        //         if (!doc) {
-        //             return res.status(404).json({
-        //                 message: 'Post not found'
-        //             })
-        //         }
-        //         res.json(doc);
-        //     })
+                if (!doc) {
+                    return res.status(404).json({
+                        message: 'Post not found'
+                    })
+                }
+                res.json(doc);
+            })
 
 
     } catch (err) {
