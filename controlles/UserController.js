@@ -37,9 +37,8 @@ export const Register = async (req, res) => {
         });
 
     } catch (err) {
-        console.log(err)
         res.status(500).json({
-            message: 'Error: User creation not possible',
+            message: 'Error: User registration error',
         })
     }
 }
