@@ -18,7 +18,7 @@ mongoose.connect('mongodb+srv://vool34:wwwwww@movieadvisor.m94cj.mongodb.net/mer
 const app = express();
 const storage = multer.diskStorage({
   destination: (_, __, somecallback) => {
-    somecallback(null, uploads);
+    somecallback(null, 'uploads');
   },
   filename: (_, file, somecallback) => {
     somecallback(null, file.originalname);
