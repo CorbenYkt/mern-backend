@@ -18,4 +18,3 @@ export const postCreateValidation = [
     //body('tags', 'Enter array of tags').optional().isString(),
     body('imageUrl', 'Incorrect image URL').optional().isString(),
 ];
-
