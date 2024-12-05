@@ -6,6 +6,9 @@ import checkAuth from './utils/checkAuth.js';
 import * as UserController from './controlles/UserController.js'
 import * as PostController from './controlles/PostController.js'
 import cors from 'cors';
+import { v4 as uuidv4 } from 'uuid'; // Импорт uuid
+import fs from 'fs';  // Для работы с файловой системой
+import path from 'path'; // Для работы с путями файлов
 
 mongoose.connect('mongodb+srv://vool34:wwwwww@movieadvisor.m94cj.mongodb.net/mernbackend')
   .then(() => {
@@ -33,11 +36,24 @@ app.use(cors());
 app.post('/auth/login', loginValidation, UserController.Login);
 app.post('/auth/register', RegisterValidation, UserController.Register);
 app.get('/auth/me', checkAuth, UserController.GetMe);
+
 app.post('/upload', checkAuth, uploadmulter.single('image'), (req, res) => {
   res.json({
     url: `/uploads/${req.file.originalname}`
   });
 })
+
+app.post('/upload/avatar', uploadmulter.single('image'), (req, res) => {
+  const uniqueName = `${uuidv4()}${path.extname(req.file.originalname)}`;
+  const __dirname = path.dirname(uniqueName);
+  const uploadPath = path.join(__dirname, 'uploads/avatars', uniqueName);
+
+  fs.renameSync(req.file.path, uploadPath);
+  res.json({
+    url: `/uploads/avatars/${uniqueName}`
+  });
+})
+
 app.get('/posts/', PostController.getAll);
 app.get('/tags', PostController.getTags);
 app.get('/posts/:id', PostController.getOne);
