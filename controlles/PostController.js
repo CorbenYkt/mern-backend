@@ -28,14 +28,13 @@ export const getTags = async (req, res) => {
 };
 
 export const getOne = async (req, res) => {
-
     const postId = req.params.id;
     try {
         const updatedPost = await PostModel.findOneAndUpdate(
             { _id: postId },
             { $inc: { viewsCount: 1 } },
             { new: true }
-        );
+        ).populate('user').exec();
 
         if (!updatedPost) {
             return res.status(404).json({
@@ -51,6 +50,7 @@ export const getOne = async (req, res) => {
         });
     }
 };
+
 export const remove = async (req, res) => {
     try {
         const postId = req.params.id;
