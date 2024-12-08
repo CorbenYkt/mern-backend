@@ -7,6 +7,7 @@ import * as UserController from './controlles/UserController.js'
 import * as PostController from './controlles/PostController.js'
 import cors from 'cors';
 import https from 'https';
+import fs from 'fs';
 
 mongoose.connect('mongodb+srv://vool34:wwwwww@movieadvisor.m94cj.mongodb.net/mernbackend')
   .then(() => {
