@@ -18,7 +18,7 @@ export const Register = async (req, res) => {
             email: req.body.email,
             password: req.body.password,
             fullName: req.body.fullName,
-            avatarUrl: req.body.avatarUrl,
+            avatar: req.body.avatar,
             passwordHash: hash,
         });
 
@@ -42,6 +42,7 @@ export const Register = async (req, res) => {
         })
     }
 }
+
 
 export const Login = async (req, res) => {
     try {
