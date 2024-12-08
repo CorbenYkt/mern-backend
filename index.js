@@ -46,6 +46,11 @@ app.post('/posts/', checkAuth, postCreateValidation, PostController.create);
 app.delete('/posts/:id', checkAuth, PostController.remove);
 app.patch('/posts/:id', checkAuth, PostController.update);
 
+const httpsServer = https.createServer({
+  key: fs.readFileSync('/etc/letsencrypt/live/corbenykt.ru/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/corbenykt.ru/fullchain.pem'),
+}, app);
+
 app.listen(4444, (err) => {
   if (err) {
     return console.log(err);
