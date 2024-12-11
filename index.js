@@ -11,10 +11,10 @@ import fs from 'fs';
 
 mongoose.connect('mongodb+srv://vool34:wwwwww@movieadvisor.m94cj.mongodb.net/mernbackend')
   .then(() => {
-    console.log('DB Status - OK')
+    console.log('Mern-backend project DB Status - OK')
   })
   .catch((err) => {
-    console.log('DB Status - ERROR', err)
+    console.log('Mern-backend project DB Status - ERROR', err)
   })
 
 const app = express();
