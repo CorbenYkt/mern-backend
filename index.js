@@ -49,11 +49,11 @@ app.delete('/posts/:id', checkAuth, PostController.remove);
 app.patch('/posts/:id', checkAuth, PostController.update);
 
 const httpsServer = https.createServer({
-  key: fs.readFileSync('/etc/letsencrypt/live/corbenykt.ru/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/corbenykt.ru/fullchain.pem'),
+  key: fs.readFileSync('/etc/letsencrypt/live/mern.corbenykt.ru/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/mern.corbenykt.ru/fullchain.pem'),
 }, app);
 
-app.listen(4444, (err) => {
+app.listen(443, (err) => {
   if (err) {
     return console.log(err);
   }
