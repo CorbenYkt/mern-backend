@@ -53,7 +53,7 @@ const httpsServer = https.createServer({
   cert: fs.readFileSync('/etc/letsencrypt/live/mern.corbenykt.ru/fullchain.pem'),
 }, app);
 
-app.listen(443, (err) => {
+httpsServer.listen(443, (err) => {
   if (err) {
     return console.log(err);
   }
