@@ -30,6 +30,7 @@ const storage = multer.diskStorage({
 const uploadmulter = multer({ storage });
 app.use(express.json({ limit: '50mb' }));
 app.use(cors());
+app.use('/uploads', express.static('uploads'));
 
 app.post('/auth/login', loginValidation, UserController.Login);
 app.post('/auth/register', RegisterValidation, UserController.Register);
