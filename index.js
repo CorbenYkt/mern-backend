@@ -5,7 +5,7 @@ import { RegisterValidation, loginValidation, postCreateValidation } from './val
 import checkAuth from './utils/checkAuth.js';
 import * as UserController from './controlles/UserController.js'
 import * as PostController from './controlles/PostController.js'
-import * as CommentController from './controllers/CommentController.js';
+import * as CommentController from './controlles/CommentController.js';
 import cors from 'cors';
 import https from 'https';
 import fs from 'fs';
