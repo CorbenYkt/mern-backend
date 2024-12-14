@@ -81,6 +81,7 @@ export const remove = async (req, res) => {
         })
     }
 };
+
 export const create = async (req, res) => {
     try {
         const doc = new PostModel({
@@ -100,6 +101,7 @@ export const create = async (req, res) => {
         })
     }
 };
+
 export const update = async (req, res) => {
     try {
         const postId = req.params.id;
