@@ -5,6 +5,7 @@ import { RegisterValidation, loginValidation, postCreateValidation } from './val
 import checkAuth from './utils/checkAuth.js';
 import * as UserController from './controlles/UserController.js'
 import * as PostController from './controlles/PostController.js'
+import * as CommentController from './controllers/CommentController.js';
 import cors from 'cors';
 import https from 'https';
 import fs from 'fs';
@@ -34,7 +35,7 @@ app.use('/uploads', express.static('uploads'));
 
 app.post('/auth/login', loginValidation, UserController.Login);
 app.post('/auth/register', RegisterValidation, UserController.Register);
-app.get('/auth/me', checkAuth, UserController.GetMe);
+app.get('/auth/me', UserController.GetMe);
 
 app.post('/upload', checkAuth, uploadmulter.single('image'), (req, res) => {
   res.json({
@@ -48,6 +49,8 @@ app.get('/posts/:id', PostController.getOne);
 app.post('/posts/', checkAuth, postCreateValidation, PostController.create);
 app.delete('/posts/:id', checkAuth, PostController.remove);
 app.patch('/posts/:id', checkAuth, PostController.update);
+app.post('/comments', checkAuth, CommentController.createComment);
+app.get('/comments/:postId', CommentController.getCommentsByPost);
 
 const httpsServer = https.createServer({
   key: fs.readFileSync('/etc/letsencrypt/live/mern.corbenykt.ru/privkey.pem'),
