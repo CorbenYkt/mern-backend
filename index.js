@@ -52,12 +52,12 @@ app.patch('/posts/:id', checkAuth, PostController.update);
 app.post('/comments', checkAuth, CommentController.createComment);
 app.get('/comments/:postId', CommentController.getCommentsByPost);
 
-const httpsServer = https.createServer({
-  key: fs.readFileSync('/etc/letsencrypt/live/mern.corbenykt.ru/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/mern.corbenykt.ru/fullchain.pem'),
-}, app);
+// const httpsServer = https.createServer({
+//   key: fs.readFileSync('/etc/letsencrypt/live/mern.corbenykt.ru/privkey.pem'),
+//   cert: fs.readFileSync('/etc/letsencrypt/live/mern.corbenykt.ru/fullchain.pem'),
+// }, app);
 
-httpsServer.listen(443, (err) => {
+app.listen(443, (err) => {
   if (err) {
     return console.log(err);
   }
