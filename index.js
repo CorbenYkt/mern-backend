@@ -49,8 +49,8 @@ app.get('/posts/:id', PostController.getOne);
 app.post('/posts/', checkAuth, postCreateValidation, PostController.create);
 app.delete('/posts/:id', checkAuth, PostController.remove);
 app.patch('/posts/:id', checkAuth, PostController.update);
-app.post('/comments', checkAuth, CommentController.createComment);
-app.get('/comments/:postId', CommentController.getCommentsByPost);
+app.post('/comments/:id', checkAuth, CommentController.createComment);
+app.get('/comments/:id', CommentController.getCommentsByPost);
 
 const httpsServer = https.createServer({
   key: fs.readFileSync('/etc/letsencrypt/live/mern.corbenykt.ru/privkey.pem'),
