@@ -1,31 +1,33 @@
-import CommentModel from '../models/Comment.js';
+// Получаем все комментарии для конкретного поста
+export const getComments = async (req, res) => {
+  try {
+    const comments = await CommentModel.find({ postId: req.params.postId }).populate('user');
+    res.status(200).json(comments);
+  } catch (error) {
+    console.log('Error in getComments:', error);
+    res.status(500).json({ message: 'Error fetching comments' });
+  }
+};
 
+// Создаем новый комментарий
 export const createComment = async (req, res) => {
   try {
-    const { postId, text } = req.body;
-    const userId = req.userId;
-    console.log(postId, text, userId)
+    const { text, userId, postId } = req.body;
+
+    if (!text || !userId || !postId) {
+      return res.status(400).json({ message: 'Invalid data' });
+    }
+
     const newComment = new CommentModel({
-      postId,
-      userId,
       text,
+      postId,
+      user: userId,
     });
 
     const savedComment = await newComment.save();
     res.status(201).json(savedComment);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Error creating a comment" });
-  }
-};
-
-export const getCommentsByPost = async (req, res) => {
-  try {
-    const { postId } = req.params;
-    const comments = await CommentModel.find({ postId }).populate("userId", "fullName avatar");
-    res.status(200).json(comments);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Error retrieving all comments" });
+  } catch (error) {
+    console.log('Error in createComment:', error);
+    res.status(500).json({ message: 'Error creating comment' });
   }
 };
