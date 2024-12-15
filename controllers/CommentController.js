@@ -36,3 +36,23 @@ export const getCommentsByPost = async (req, res) => {
   }
 };
 
+export const deleteComment = async (req, res) => {
+  try {
+    const commentId = req.params.id;
+    const comment = await CommentModel.findById(commentId);
+    if (!comment) {
+      return res.status(404).json({ message: 'Comment is not found' });
+    }
+
+    if (comment.userId.toString() !== req.userId) {
+      return res.status(403).json({ message: 'No access!' });
+    }
+
+    await CommentModel.findByIdAndDelete(commentId);
+
+    res.json({ message: 'Comment deleted' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error deleting comment' });
+  }
+};
