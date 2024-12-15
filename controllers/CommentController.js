@@ -1,3 +1,5 @@
+import CommentModel from '../models/Comment.js';
+
 // Получаем все комментарии для конкретного поста
 export const getComments = async (req, res) => {
   try {
