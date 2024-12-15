@@ -1,7 +1,8 @@
 
 # MERN Backend
 
-This repository contains the API for the main website https://corbenykt.github.io/mernproject. This backend is dedicated to the project, which is a website of a regular information portal. The API is built using Node.js and Express and handles following requests:
+This repository contains the API for the main website Website: https://corbenykt.github.io/mern-frontend/ (GIT: https://github.com/CorbenYkt/mern-frontendend).
+This backend is dedicated to the project, which is a website of a regular information portal. The API is built using Node.js and Express and handles following requests:
 
 ```javascript
 app.post('/auth/login', loginValidation, UserController.Login);
@@ -28,7 +29,10 @@ As you see this one is more complex than MovieAdvisor's API. The structure is st
 
 The AWS EC2 server runs on port 4444 and uses an SSL certificate. This setup is necessary because GitHub, which hosts the frontend, also uses a certificate. To ensure secure communication, frontend requests to the backend are encrypted.
 
-Links:
-Website/Frontend: https://corbenykt.github.io/mernproject
+## Links:
+
+Website: https://corbenykt.github.io/mern-frontend
 
 Backend(this): https://github.com/CorbenYkt/mern-backend
+
+Frontend: https://github.com/CorbenYkt/mern-frontendend
