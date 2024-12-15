@@ -3,9 +3,9 @@ import multer from 'multer';
 import mongoose from 'mongoose';
 import { RegisterValidation, loginValidation, postCreateValidation } from './validations.js';
 import checkAuth from './utils/checkAuth.js';
-import * as UserController from './controlles/UserController.js'
-import * as PostController from './controlles/PostController.js'
-import * as CommentController from './controlles/CommentController.js';
+import * as UserController from './controllers/UserController.js'
+import * as PostController from './controllers/PostController.js'
+import * as CommentController from './controllers/CommentController.js';
 import cors from 'cors';
 import https from 'https';
 import fs from 'fs';
@@ -52,12 +52,12 @@ app.patch('/posts/:id', checkAuth, PostController.update);
 app.post('/comments', checkAuth, CommentController.createComment);
 app.get('/comments/:postId', CommentController.getCommentsByPost);
 
-// const httpsServer = https.createServer({
-//   key: fs.readFileSync('/etc/letsencrypt/live/mern.corbenykt.ru/privkey.pem'),
-//   cert: fs.readFileSync('/etc/letsencrypt/live/mern.corbenykt.ru/fullchain.pem'),
-// }, app);
+const httpsServer = https.createServer({
+  key: fs.readFileSync('/etc/letsencrypt/live/mern.corbenykt.ru/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/mern.corbenykt.ru/fullchain.pem'),
+}, app);
 
-app.listen(443, (err) => {
+httpsServer.listen(443, (err) => {
   if (err) {
     return console.log(err);
   }
