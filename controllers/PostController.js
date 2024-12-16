@@ -1,10 +1,16 @@
 import PostModel from '../models/Post.js';
+import CommentModel from '../models/Comment.js';
 
 export const getAll = async (req, res) => {
     try {
         const posts = await PostModel.find().populate('user').exec();
-
-        res.json(posts)
+        const postsWithComments = await Promise.all(
+            posts.map(async (post) => {
+                const commentsCount = await CommentModel.countDocuments({ postId: post._id });
+                return { ...post._doc, commentsCount };
+            })
+        );
+        res.json(postsWithComments)
     } catch (err) {
         console.log(err)
         res.status(500).json({
@@ -42,7 +48,10 @@ export const getOne = async (req, res) => {
             });
         }
 
-        res.json(updatedPost);
+        //res.json(updatedPost);
+        const commentsCount = await CommentModel.countDocuments({ postId: updatedPost._id });
+        res.json({ ...updatedPost._doc, commentsCount });
+
     } catch (err) {
         console.error(err);
         res.status(500).json({
