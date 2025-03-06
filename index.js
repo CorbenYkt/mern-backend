@@ -13,6 +13,9 @@ import * as CommentController from "./controllers/CommentController.js";
 import cors from "cors";
 import https from "https";
 import fs from "fs";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 mongoose
   .connect(process.env.MONGO_URI)
