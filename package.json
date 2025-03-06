@@ -1,7 +1,7 @@
 {
   "name": "apihandler",
   "version": "1.0.1",
-  "description": "",
+  "description": "This repository contains the API for the main website Website: https://corbenykt.github.io/mern-frontend/ (GIT: https://github.com/CorbenYkt/mern-frontendend).\r This backend is dedicated to the project, which is a website of a regular information portal. The API is built using Node.js and Express and handles following requests:",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -24,5 +24,6 @@
     "multer": "^1.4.5-lts.1",
     "nodemon": "^3.1.4",
     "uuid": "^11.0.3"
-  }
+  },
+  "devDependencies": {}
 }
